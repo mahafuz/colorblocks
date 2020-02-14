@@ -2,6 +2,8 @@ import React from 'react';
 import Title from './Title';
 import Button from './elements/Button';
 import styled from 'styled-components';
+import FGColor from './elements/FGColor';
+import BGColor from './elements/BGColor';
 
 const Display = styled.div`
     display: flex;
@@ -11,17 +13,12 @@ const Display = styled.div`
     justify-content: space-between;
 `;
 
-const Monitor = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    .color {
-        padding: 30px;
-        background: red;
-        display: flex;
-        flex-basis: 50%;
-        margin: 0 3px;
-    }
+const Pickers = styled.div`
+	display: flex;
+    flex-basis: 50%;
+    margin: 0 3px;
+    position: relative;
+    height: 65px;
 `;
 
 const generateRandomColor = () => `#${(0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1, 6)}`;
@@ -92,8 +89,8 @@ const RandColors = () => {
 }
 
 
-const ThemeDisplay = () => (
-    <div>
+const ColorPicker = () => (
+    <div className="hi">
         <Display>
             <Title backgroundColor={'linear-gradient(to right, rgb(34, 34, 34) 50%, rgb(221, 221, 221) 50%);'} id={'dafafd'} title={'Combination'} />
             <div>
@@ -101,11 +98,11 @@ const ThemeDisplay = () => (
                 <Button black>Swap ⇌</Button>
             </div>
         </Display>
-        <Monitor>
-            <div className="color"></div>
-            <div className="color"></div>
-        </Monitor>
+        <Pickers>
+            <FGColor />
+            <BGColor />
+        </Pickers>
     </div>
 );
 
-export default ThemeDisplay;
+export default ColorPicker;
