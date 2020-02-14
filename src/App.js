@@ -9,8 +9,8 @@ import { ThemeProvider } from 'styled-components';
 
 function App() {
   return (
-	  <ThemeProvider theme={theme}>
-		  <GlobalStyle />
+	<ThemeProvider theme={theme}>
+		<GlobalStyle />
 		<div className="App">
 			<div className="container">
 				<Header />
