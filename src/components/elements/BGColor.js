@@ -53,14 +53,16 @@ class BGColor extends Component {
     };
 
     render() {
+        const { bgColor } = this.props.displayColors;
+
         return (
             <EachPicker>
-                <BackgroundColor color={ this.state.color } className="color" onClick={ this.handleClick }>
-                    <Color color={this.state.color} />
+                <BackgroundColor color={ bgColor } className="color" onClick={ this.handleClick }>
+                    <Color color={bgColor} />
                 </BackgroundColor>
                 { this.state.displayColorPicker ? <Popover>
                     <Cover onClick={ this.handleClose }/>
-                    <ChromePicker color={ this.state.color } onChange={ this.handleChange } />
+                    <ChromePicker color={ bgColor } onChange={ this.handleChange } />
                 </Popover> : null }
                 <b>Background Color</b>
             </EachPicker>

@@ -53,15 +53,16 @@ class FGColor extends Component {
     };
 
     render() {
+        const { fgColor } = this.props.displayColors;
         return (
             <EachPicker>
-                <ForgroundColor color={ this.state.color } className="color" onClick={ this.handleClick }>
-                    <Color color={this.state.color} />
+                <ForgroundColor color={ fgColor } className="color" onClick={ this.handleClick }>
+                    <Color color={fgColor} />
                 </ForgroundColor>
                 
                 { this.state.displayColorPicker ? <Popover>
                     <Cover onClick={ this.handleClose }/>
-                    <ChromePicker color={ this.state.color } onChange={ this.handleChange } />
+                    <ChromePicker color={ fgColor } onChange={ this.handleChange } />
                 </Popover> : null }
 
                 <b>Forground Color</b>

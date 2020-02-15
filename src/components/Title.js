@@ -9,11 +9,15 @@ const Nav = styled.nav`
     align-items: center;
 `;
 
-const Title = ({backgroundColor, id, title}) => (
-    <Nav className="title" >
-        <Circle backgroundColor={backgroundColor}></Circle>
-        <h4 id={id} >{title}</h4>
-    </Nav>
-);
+const Title = ({backgroundColor, id, title}) => {
+    // console.log(backgroundColor);
+
+    return (
+        <Nav className="title" >
+            <Circle backgroundColor={backgroundColor}></Circle>
+            <h4 id={id} >{title}</h4>
+        </Nav>
+    )
+}
 
 export default Title;

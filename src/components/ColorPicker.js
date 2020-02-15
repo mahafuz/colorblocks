@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Title from './Title';
 import Button from './elements/Button';
 import styled from 'styled-components';
@@ -76,33 +77,57 @@ const isGoodColorDifference = (bgColor, foregroundColor) => {
 	return Math.max(bgColorRGB.r, foregroundColorRGB.r) - Math.min(bgColorRGB.r, foregroundColorRGB.r) + Math.max(bgColorRGB.g, foregroundColorRGB.g) - Math.min(bgColorRGB.g, foregroundColorRGB.g) + Math.max(bgColorRGB.b, foregroundColorRGB.b)-Math.min(bgColorRGB.b, foregroundColorRGB.b) >= 500
 }
 
-const RandColors = () => {
-    let primaryBgColor = generateRandomColor();
-    let primaryColor = complementaryColor(primaryBgColor);
+//#266075
+// #EB4949
 
-    while(!isGoodBrightnessDifference(primaryBgColor, primaryColor) && isGoodColorDifference(primaryBgColor, primaryColor)) {
-        primaryBgColor = generateRandomColor();
-        primaryColor = complementaryColor(primaryBgColor);
-    }
+class ColorPicker extends Component {
+	state = {
+		fgColor: undefined,
+		bgColor: undefined
+	}
 
-    // now update the store
+	RandColors = () => {
+		let primaryBgColor = generateRandomColor();
+		let primaryColor = complementaryColor(primaryBgColor);
+	
+		while(!isGoodBrightnessDifference(primaryBgColor, primaryColor) && isGoodColorDifference(primaryBgColor, primaryColor)) {
+			primaryBgColor = generateRandomColor();
+			primaryColor = complementaryColor(primaryBgColor);
+		}
+		this.props.updateColorRand({ fgColor: primaryColor, bgColor: primaryBgColor });
+	};
+
+	render() {
+		const { fgColor, bgColor } = this.props.displayColors;
+		return (
+			<div>
+				<Display>
+					<Title backgroundColor={`linear-gradient(to right, ${fgColor} 50%, ${bgColor} 50%);`} id={'dafafd'} title={'Combination'} />
+					<div>
+						<Button onClick={this.RandColors} black>Random ⭯</Button>
+						<Button onClick={this.props.swapColors} black>Swap ⇌</Button>
+					</div>
+				</Display>
+				<Pickers>
+					<FGColor />
+					<BGColor />
+				</Pickers>
+			</div>
+		)
+	}
 }
 
+const mapStateToProps = state => {
+	return {
+		displayColors: state.displayColors
+	}
+};
 
-const ColorPicker = () => (
-    <div className="hi">
-        <Display>
-            <Title backgroundColor={'linear-gradient(to right, rgb(34, 34, 34) 50%, rgb(221, 221, 221) 50%);'} id={'dafafd'} title={'Combination'} />
-            <div>
-                <Button onClick={RandColors} black>Random ⭯</Button>
-                <Button black>Swap ⇌</Button>
-            </div>
-        </Display>
-        <Pickers>
-            <FGColor />
-            <BGColor />
-        </Pickers>
-    </div>
-);
+const mapDispatchToProps = dispatch => {
+	return {
+		swapColors: () => { dispatch({type: 'SWAP_COLORS' }) },
+		updateColorRand: (color) => { dispatch({type: 'UPDATE_COLOR_RAND', color: color}) }
+	}
+}
 
-export default ColorPicker;
+export default connect(mapStateToProps, mapDispatchToProps)(ColorPicker);

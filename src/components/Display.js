@@ -12,7 +12,6 @@ const Section = styled.section`
 
 const Display = (props) => {
     const {fgColor, bgColor} = props.displayColors;
-    console.log('updated', fgColor);
     return(
         <Section fgColor={fgColor} bgColor={bgColor}>
             <h1>Color Blocks Big Title</h1>
