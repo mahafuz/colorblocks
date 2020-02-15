@@ -21,12 +21,16 @@ const Logo = styled.h1`
     font-weight: bold;
 `;
 
+const openGitHub = () => {
+    window.open('https://github.com/mahafuz/colorblocks', '_blank');
+}
+
 const Header = () => (
     <Head>
         <Logo>ColorBlock</Logo>
         <Div>
-            <Button black>HEX ↔ RGB</Button>
-            <Button black><img src={githubLogo} alt={'colorblock-logo'} />GitHub</Button>
+            {/* <Button black>HEX ↔ RGB</Button> */}
+            <Button onClick={openGitHub} black><img src={githubLogo} alt={'colorblock-logo'} />GitHub</Button>
         </Div>
     </Head>
 );

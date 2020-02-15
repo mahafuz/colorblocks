@@ -22,6 +22,10 @@ const Pickers = styled.div`
     height: 65px;
 `;
 
+const PickersWrapper = styled.div`
+	padding-bottom: 30px;
+`;
+
 const generateRandomColor = () => `#${(0x1000000 + Math.random() * 0xFFFFFF).toString(16).substr(1, 6)}`;
 const complementaryColor = (color) => {
     let hexColor = color.replace('#', '0x');
@@ -100,7 +104,7 @@ class ColorPicker extends Component {
 	render() {
 		const { fgColor, bgColor } = this.props.displayColors;
 		return (
-			<div>
+			<PickersWrapper>
 				<Display>
 					<Title backgroundColor={`linear-gradient(to right, ${fgColor} 50%, ${bgColor} 50%);`} id={'dafafd'} title={'Combination'} />
 					<div>
@@ -112,7 +116,7 @@ class ColorPicker extends Component {
 					<FGColor />
 					<BGColor />
 				</Pickers>
-			</div>
+			</PickersWrapper>
 		)
 	}
 }

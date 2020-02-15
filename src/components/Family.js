@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '../data/colors';
+import { connect } from 'react-redux';
 
 const FamilyTag = styled.div`
     display: flex;
@@ -36,6 +37,17 @@ const ColorBtn = styled.div`
 `;
 
 class Family extends Component {
+
+    state = {
+        fgColor: undefined,
+        bgBackground: undefined
+    }
+
+    handleClick(e) {
+        this.props.setColor(e.target.dataset.key);
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
     render() {
         const { color } = this.props;
         return(
@@ -44,7 +56,7 @@ class Family extends Component {
                     Object.keys(colors[color]).map( key => {
                         return(
                             <Color className="color" key={key}>
-                                <ColorBtn backgroundColor={colors[color][key]}></ColorBtn>
+                                <ColorBtn data-key={colors[color][key]} onClick={ e => this.handleClick(e)} backgroundColor={colors[color][key]}></ColorBtn>
                                 <b>{key}</b>
                                 <input type="text" readOnly value={colors[color][key]} />
                             </Color>
@@ -56,4 +68,16 @@ class Family extends Component {
     }
 }
 
-export default Family;
+const mapStateToProps = state => {
+    return {
+        displayColors: state.displayColors
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        setColor: (color) => dispatch({ type: 'SET_COLOR', color: color})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Family);

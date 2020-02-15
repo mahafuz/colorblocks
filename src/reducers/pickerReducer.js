@@ -10,14 +10,16 @@ const pickerReducer = (state = {}, action) => {
         case 'UPDATE_BG_COLOR':
             return {
                 ...state,
-                bgColor: action.color
+                bgColor: action.color,
+                updatedDisplay: 'bgColor'
             }
 
         case 'SWAP_COLORS':
             return {
                 ...state,
                 bgColor: state.fgColor,
-                fgColor: state.bgColor
+                fgColor: state.bgColor,
+                updatedDisplay: 'bgColor'
             }
             break;
         case 'UPDATE_COLOR_RAND':
@@ -26,6 +28,20 @@ const pickerReducer = (state = {}, action) => {
                 ...action.color
             }     
             break;
+
+        case 'SET_COLOR':
+                if(state.updatedDisplay == 'fgColor') {
+                    return {
+                        ...state,
+                        fgColor: action.color
+                    }
+                } else {
+                    return {
+                        ...state,
+                        bgColor: action.color
+                    }
+                }
+                break;
 
         default:
             return state;

@@ -9,7 +9,7 @@ const MatColor = () => (
             Object.keys(colors).map( color => {
                 return(
                     <div key={color.toLowerCase()}>
-                        <Title backgroundColor={colors[color][500]} id={color.toLowerCase()} title={color} />
+                        <Title backgroundColor={colors[color][500]} id={color.toLowerCase().split(' ').join('-')} title={color} />
                         <Family color={color} />
                     </div>
                 )
