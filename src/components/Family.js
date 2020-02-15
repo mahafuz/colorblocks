@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { colors } from '../data/colors';
 
@@ -35,22 +35,25 @@ const ColorBtn = styled.div`
     transition: .2s;
 `;
 
-//The problem is here because this component is depedent on colors and color object. this should be independent;
-
-const Family = ({color}) => (
-    <FamilyTag className="family">
-        {
-            Object.keys(colors[color]).map( key => {
-                return(
-                    <Color className="color" key={key}>
-                        <ColorBtn backgroundColor={colors[color][key]}></ColorBtn>
-                        <b>{key}</b>
-                        <input type="text" readOnly value={colors[color][key]} />
-                    </Color>
-                )
-            })
-        }
-    </FamilyTag>
-);
+class Family extends Component {
+    render() {
+        const { color } = this.props;
+        return(
+            <FamilyTag className="family">
+                {
+                    Object.keys(colors[color]).map( key => {
+                        return(
+                            <Color className="color" key={key}>
+                                <ColorBtn backgroundColor={colors[color][key]}></ColorBtn>
+                                <b>{key}</b>
+                                <input type="text" readOnly value={colors[color][key]} />
+                            </Color>
+                        )
+                    })
+                }
+            </FamilyTag>
+        )
+    }
+}
 
 export default Family;

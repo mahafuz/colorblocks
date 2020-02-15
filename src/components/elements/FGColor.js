@@ -79,7 +79,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		updateFGColor: (color) => { dispatch({type: 'UPDATE_FG_COLOR', color: color}) }
+        updateFGColor: (color) => { dispatch({type: 'UPDATE_FG_COLOR', color: color}) }
 	}
 }
 
