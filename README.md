@@ -1,5 +1,5 @@
 
-[https://colorblocks.netlify.app/]![](previews/preview-1.png)
+[]![](previews/preview-1.png)(https://colorblocks.netlify.app/)
 
 ## Available Scripts
 
